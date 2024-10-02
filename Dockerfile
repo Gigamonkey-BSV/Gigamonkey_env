@@ -25,3 +25,6 @@ RUN cmake -G Ninja  -B build -S . -DPACKAGE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release
 RUN cmake --build build -j 4
 RUN cmake --install build
 
+WORKDIR /tmp
+RUN rm -rf /tmp/data
+RUN rm -rf /tmp/Gigamonkey
