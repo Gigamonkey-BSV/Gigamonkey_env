@@ -1,4 +1,4 @@
-FROM gigamonkey/gigamonkey-base-dev:v2.1
+FROM gigamonkey/gigamonkey-base-dev:v2.2.1
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG DATA_VERSION
