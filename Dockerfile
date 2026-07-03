@@ -1,4 +1,4 @@
-FROM gigamonkey/gigamonkey-base-dev:v2.2.1
+FROM gigamonkey/gigamonkey-base-dev:v2.3
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG DATA_VERSION
@@ -16,6 +16,15 @@ RUN cmake -G Ninja -B build -S . -DPACKAGE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release
 RUN cmake --build build -j 4
 RUN cmake --install build
 
+#net
+WORKDIR /tmp
+RUN git clone https://github.com/DanielKrawisz/net.git
+WORKDIR /tmp/net
+RUN git checkout -q ${NET_VERSION}
+RUN cmake -G Ninja -B build -S . -DPACKAGE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release
+RUN cmake --build build -j 4
+RUN cmake --install build
+
 #gigamonkey
 WORKDIR /tmp
 RUN git clone https://github.com/Gigamonkey-BSV/Gigamonkey.git
@@ -27,4 +36,5 @@ RUN cmake --install build
 
 WORKDIR /tmp
 RUN rm -rf /tmp/data
+RUN rm -rf /tmp/net
 RUN rm -rf /tmp/Gigamonkey
